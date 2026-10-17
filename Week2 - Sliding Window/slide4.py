@@ -1,0 +1,25 @@
+def longest_at_most(nums,k):
+
+    # Write longest_at_most(nums, k): 
+    # the length of the longest run of neighbouring numbers whose sum is at most k. 
+    # All numbers are positive. 
+    # Grow the window on the right, and shrink it from the left when the sum gets too big.
+
+    # Check: end with print(longest_at_most([2, 1, 3, 1, 1, 4], 5)), which should print 3
+
+    window_sum = 0
+    left = 0
+    best = 0 
+
+    for right in range(len(nums)):
+        
+        window_sum += nums[right]
+
+        while window_sum > k:
+            window_sum -= nums[left]
+            left += 1
+            best = max(best, right - left + 1)
+
+    return best
+
+print(longest_at_most([2,1,3,1,1,4], 5))
